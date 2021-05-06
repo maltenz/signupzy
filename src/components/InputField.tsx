@@ -18,6 +18,7 @@ const useStyles = createUseStyles({
       padding: '0.8em',
       borderRadius: 4,
       border: '0.5px grey solid',
+      width: '100%',
     },
   },
 });
