@@ -52,11 +52,10 @@ interface IFormInput {
 const SignUp: FC = () => {
   const classes = useStyles();
   const {
-    register,
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<IFormInput>();
+  } = useForm<IFormInput>({ mode: 'onBlur' });
   const onSubmit = (data: IFormInput) => console.log(data);
   console.log({ errors });
   return (
@@ -76,30 +75,32 @@ const SignUp: FC = () => {
           label="Username"
           control={control}
           name="username"
-          defaultValue={''}
+          required
         />
         <InputField
           label="Email"
           control={control}
           name="email"
+          required
+          type="email"
           validate={(value) => {
             const re = /^\S+@\S+\.\S+$/;
-            return 'Invalid Email Address';
-            // return re.test(value as string) ? '' : 'Invalid Email Address';
+            return re.test(value as string) ? true : 'Invalid Email Address';
           }}
-          defaultValue={''}
         />
         <InputField
           label="Password"
+          type="password"
           control={control}
           name="password"
-          defaultValue={''}
+          required
         />
         <InputField
           label="Confirm Password"
           control={control}
+          type="password"
           name="confirmPassword"
-          defaultValue={''}
+          required
         />
 
         <button type="submit">submit</button>

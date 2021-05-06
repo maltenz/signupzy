@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { createUseStyles } from 'react-jss';
 
-import { useController, Controller } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 
 const useStyles = createUseStyles({
   inputField: {
@@ -45,23 +45,13 @@ const InputField: FC<Props> = ({
 }) => {
   const classes = useStyles();
 
-  // const { field, fieldState, formState } = useController({
-  //   control,
-  //   name,
-  //   defaultValue,
-  //   rules: { required, validate, pattern: /[A-Za-z]{3}/ },
-  // });
-  // console.log({ field, fieldState, formState });
-
   return (
     <Controller
       control={control}
       name={name}
-      rules={{ required, validate }}
+      rules={{ required: `${name} is required`, validate }}
       defaultValue={defaultValue}
-      render={({ field, fieldState, formState }) => {
-        console.log({ field, fieldState });
-
+      render={({ field, fieldState }) => {
         return (
           <div className={classes.inputField}>
             <label htmlFor={id}>{label}</label>
@@ -70,7 +60,7 @@ const InputField: FC<Props> = ({
               <input id={id} type={type} {...field} aria-required={required} />
             </div>
             <span id={`${id}_feedback`} aria-live="polite">
-              123
+              {fieldState.error?.message}
             </span>
           </div>
         );
