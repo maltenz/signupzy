@@ -1,6 +1,8 @@
 import { FC } from 'react';
 import { createUseStyles } from 'react-jss';
 
+import { useController, Control } from 'react-hook-form';
+
 const useStyles = createUseStyles({
   inputField: {
     margin: '0.5em 0',
@@ -22,17 +24,22 @@ const useStyles = createUseStyles({
 
 type Props = {
   label: string;
+  control: any;
+  name: string;
+  defaultValue: string;
 };
 
-const InputField: FC<Props> = ({ label }) => {
+const InputField: FC<Props> = ({ label, control, name, defaultValue }) => {
   const classes = useStyles();
+
+  const { field, fieldState } = useController({ control, name, defaultValue });
 
   return (
     <div className={classes.inputField}>
       <label>
         {label}
         <div className={classes.inputWrapper}>
-          <input type="text" />
+          <input type="text" {...field} />
         </div>
       </label>
     </div>

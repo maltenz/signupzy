@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { createUseStyles } from 'react-jss';
+import { useForm } from 'react-hook-form';
 
 import InputField from '../components/InputField';
 
@@ -41,11 +42,26 @@ const useStyles = createUseStyles({
   },
 });
 
+interface IFormInput {
+  userName: String;
+  email: String;
+  password: String;
+  confirmPassword: String;
+}
+
 const SignUp: FC = () => {
   const classes = useStyles();
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IFormInput>();
+  const onSubmit = (data: IFormInput) => console.log(data);
+
   return (
     <div className={classes.formContainer}>
-      <form className={classes.form}>
+      <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={classes.formHeader} role="heading" aria-level={1}>
           Signupzy
         </div>
@@ -56,10 +72,32 @@ const SignUp: FC = () => {
           <div>Error</div>
         </div>
 
-        <InputField label="Username" />
-        <InputField label="Email" />
-        <InputField label="Password" />
-        <InputField label="Confirm Password" />
+        <InputField
+          label="Username"
+          control={control}
+          name="username"
+          defaultValue={''}
+        />
+        <InputField
+          label="Email"
+          control={control}
+          name="email"
+          defaultValue={''}
+        />
+        <InputField
+          label="Password"
+          control={control}
+          name="password"
+          defaultValue={''}
+        />
+        <InputField
+          label="Confirm Password"
+          control={control}
+          name="confirmPassword"
+          defaultValue={''}
+        />
+
+        <button type="submit">submit</button>
       </form>
     </div>
   );
