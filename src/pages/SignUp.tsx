@@ -58,7 +58,7 @@ const SignUp: FC = () => {
     formState: { errors },
   } = useForm<IFormInput>();
   const onSubmit = (data: IFormInput) => console.log(data);
-
+  console.log({ errors });
   return (
     <div className={classes.formContainer}>
       <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
@@ -82,6 +82,11 @@ const SignUp: FC = () => {
           label="Email"
           control={control}
           name="email"
+          validate={(value) => {
+            const re = /^\S+@\S+\.\S+$/;
+            return 'Invalid Email Address';
+            // return re.test(value as string) ? '' : 'Invalid Email Address';
+          }}
           defaultValue={''}
         />
         <InputField
