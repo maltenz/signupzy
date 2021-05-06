@@ -22,6 +22,7 @@ module.exports = {
     },
   },
   rules: {
+    'no-unused-vars': 'off',
     'react/jsx-props-no-spreading': 'off',
     'no-useless-escape': 'off',
     'no-shadow': 'off',
