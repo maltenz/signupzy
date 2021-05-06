@@ -20,28 +20,17 @@ const useStyles = createUseStyles({
     padding: '2em',
     border: '1px #cac3c3 solid',
     borderRadius: 8,
+    width: '100%',
+    maxWidth: 320,
   },
   formHeader: {
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: '2em',
   },
-
-  inputField: {
-    margin: '0.5em 0',
-  },
-
-  inputWrapper: {
-    margin: '0.4em 0',
-    boxSizing: 'border-box',
-    '& input': {
-      font: 'inherit',
-      color: 'currentColor',
-      height: '1.1876em',
-      padding: '0.8em',
-      borderRadius: 4,
-      border: '0.5px grey solid',
-    },
+  errorSummary: {
+    backgroundColor: 'red',
+    padding: 5,
   },
 });
 
@@ -58,6 +47,7 @@ const SignUp: FC = () => {
     control,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm<IFormInput>({ mode: 'onBlur' });
   const onSubmit = (data: IFormInput) => console.log(data);
   console.log({ errors });
@@ -70,7 +60,7 @@ const SignUp: FC = () => {
 
         <p>Welcome, please signup</p>
 
-        <div>
+        <div role="alert" className={classes.errorSummary}>
           {Object.entries(errors).map(
             ([key, err]: any): JSX.Element => {
               return <div key={key}>{err.message}</div>;
@@ -98,6 +88,7 @@ const SignUp: FC = () => {
           type="password"
           name="confirmPassword"
           required
+          validate={(value) => (value === watch('password') ? true : 'The password does not match')}
         />
 
         <button type="submit">submit</button>
