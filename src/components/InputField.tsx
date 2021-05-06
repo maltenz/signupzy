@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { createUseStyles } from 'react-jss';
 
 import { Controller } from 'react-hook-form';

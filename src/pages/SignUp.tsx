@@ -1,9 +1,12 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { createUseStyles } from 'react-jss';
 import { useForm } from 'react-hook-form';
 
 import InputField from '../components/InputField';
 
+const ERR_MESSAGES = {
+  email: 'Invalid Email Address',
+};
 const useStyles = createUseStyles({
   formContainer: {
     display: 'flex',
@@ -68,33 +71,27 @@ const SignUp: FC = () => {
         <p>Welcome, please signup</p>
 
         <div>
+          {Object.entries(errors).map(
+            ([key, err]: any): JSX.Element => {
+              return <div key={key}>{err.message}</div>;
+            }
+          )}
           <div>Error</div>
         </div>
 
-        <InputField
-          label="Username"
-          control={control}
-          name="username"
-          required
-        />
+        <InputField label="Username" control={control} name="username" required />
         <InputField
           label="Email"
           control={control}
           name="email"
           required
           type="email"
-          validate={(value) => {
+          validate={(value: any) => {
             const re = /^\S+@\S+\.\S+$/;
-            return re.test(value as string) ? true : 'Invalid Email Address';
+            return re.test(value) ? true : ERR_MESSAGES.email;
           }}
         />
-        <InputField
-          label="Password"
-          type="password"
-          control={control}
-          name="password"
-          required
-        />
+        <InputField label="Password" type="password" control={control} name="password" required />
         <InputField
           label="Confirm Password"
           control={control}
