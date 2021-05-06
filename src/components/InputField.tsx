@@ -1,7 +1,7 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { createUseStyles } from 'react-jss';
 
-import { useController, Controller } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 
 const useStyles = createUseStyles({
   inputField: {
@@ -59,8 +59,8 @@ const InputField: FC<Props> = ({
       name={name}
       rules={{ required, validate }}
       defaultValue={defaultValue}
-      render={({ field, fieldState, formState }) => {
-        console.log({ field, fieldState });
+      render={({ field }) => {
+        // console.log({ field, fieldState });
 
         return (
           <div className={classes.inputField}>
