@@ -22,6 +22,7 @@ module.exports = {
     },
   },
   rules: {
+    'no-console': 'off',
     'no-unused-vars': 'off',
     'react/jsx-props-no-spreading': 'off',
     'no-useless-escape': 'off',

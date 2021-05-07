@@ -29,8 +29,47 @@ const useStyles = createUseStyles({
     fontSize: '2em',
   },
   errorSummary: {
-    backgroundColor: 'red',
-    padding: 5,
+    // backgroundColor: '#ff3434',
+    padding: 20,
+    '& h2': {
+      textAlign: 'center',
+    },
+  },
+  ul: {
+    // listStyle: 'none',
+    margin: 0,
+    marginLeft: 20,
+    padding: 0,
+    color: '#ff3434',
+  },
+  li: {
+    marginBottom: 10,
+  },
+  a: {
+    textDecoration: 'none',
+    color: '#ff3434',
+    fontWeight: '700',
+    fontSize: '0.85em',
+  },
+  h2: {
+    backgroundColor: '#ff3434',
+    padding: '0.5em',
+  },
+  button: {
+    backgroundColor: '#000',
+    color: '#fff',
+    appearance: 'none',
+    outline: 0,
+    padding: '10px 20px',
+    borderRadius: 50,
+    border: 'none',
+    cursor: 'pointer',
+    fontSize: '1.5em',
+    float: 'right',
+
+    '&:hover': {
+      backgroundColor: 'blue',
+    },
   },
 });
 
@@ -53,11 +92,7 @@ const SignUp: FC = () => {
 
   return (
     <main className={classes.formContainer}>
-      <form
-        className={classes.form}
-        onSubmit={handleSubmit(onSubmit)}
-        noValidate
-      >
+      <form className={classes.form} onSubmit={handleSubmit(onSubmit)} noValidate>
         <div className={classes.formHeader} role="heading" aria-level={1}>
           Signupzy
         </div>
@@ -66,14 +101,15 @@ const SignUp: FC = () => {
 
         {Object.keys(errors).length > 0 && (
           <div role="alert" tabIndex={-1} className={classes.errorSummary}>
-            <h2>Error</h2>
-
-            <ul>
+            <h2 className={classes.h2}>Woops, there was an error</h2>
+            <ul className={classes.ul}>
               {Object.entries(errors).map(
                 ([key, err]: any): JSX.Element => {
                   return (
-                    <li key={key}>
-                      <a href={`#${err.ref.id}`}>{err.message}</a>
+                    <li key={key} className={classes.li}>
+                      <a className={classes.a} href={`#${err.ref.id}`}>
+                        {err.message}
+                      </a>
                     </li>
                   );
                 }
@@ -82,12 +118,7 @@ const SignUp: FC = () => {
           </div>
         )}
 
-        <InputField
-          label="Username"
-          control={control}
-          name="username"
-          required
-        />
+        <InputField label="Username" control={control} name="username" required />
         <InputField
           label="Email"
           control={control}
@@ -99,25 +130,19 @@ const SignUp: FC = () => {
             return re.test(value) ? true : ERR_MESSAGES.email;
           }}
         />
-        <InputField
-          label="Password"
-          type="password"
-          control={control}
-          name="password"
-          required
-        />
+        <InputField label="Password" type="password" control={control} name="password" required />
         <InputField
           label="Confirm Password"
           control={control}
           type="password"
           name="confirmPassword"
           required
-          validate={(value) =>
-            value === watch('password') ? true : 'The password does not match'
-          }
+          validate={(value) => (value === watch('password') ? true : 'The password does not match')}
         />
 
-        <button type="submit">submit</button>
+        <button type="submit" className={classes.button}>
+          submit
+        </button>
       </form>
     </main>
   );

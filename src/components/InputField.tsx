@@ -5,11 +5,11 @@ import { Controller } from 'react-hook-form';
 
 const useStyles = createUseStyles({
   inputField: {
-    margin: '0.5em 0',
+    margin: '1em 0',
   },
 
   inputWrapper: {
-    margin: '0.4em 0',
+    margin: '0.4em 0 0',
     boxSizing: 'border-box',
     '& input': {
       font: 'inherit',
@@ -20,6 +20,12 @@ const useStyles = createUseStyles({
       border: '0.5px grey solid',
       width: '100%',
     },
+  },
+  span: {
+    fontSize: '0.8em',
+    color: '#ff3434',
+    fontWeight: 700,
+    // marginTop: '-1rem',
   },
 });
 
@@ -43,6 +49,7 @@ const InputField: FC<Props> = ({
   defaultValue = '',
   required,
   validate,
+  ...rest
 }) => {
   const classes = useStyles();
 
@@ -67,9 +74,10 @@ const InputField: FC<Props> = ({
                 aria-invalid={fieldState.invalid}
                 aria-describedby={`${id}_feedback`}
                 aria-required={required}
+                {...rest}
               />
             </div>
-            <span id={`${id}_feedback`} aria-live="assertive">
+            <span id={`${id}_feedback`} aria-live="assertive" className={classes.span}>
               {fieldState.error?.message}
             </span>
           </div>
