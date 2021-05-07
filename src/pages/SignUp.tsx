@@ -50,7 +50,7 @@ const SignUp: FC = () => {
     watch,
   } = useForm<IFormInput>({ mode: 'onBlur' });
   const onSubmit = (data: IFormInput) => console.log(data);
-  console.log({ errors });
+
   return (
     <div className={classes.formContainer}>
       <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
@@ -60,16 +60,30 @@ const SignUp: FC = () => {
 
         <p>Welcome, please signup</p>
 
-        <div role="alert" className={classes.errorSummary}>
-          {Object.entries(errors).map(
-            ([key, err]: any): JSX.Element => {
-              return <div key={key}>{err.message}</div>;
-            }
-          )}
-          <div>Error</div>
-        </div>
+        {Object.keys(errors).length > 0 && (
+          <div role="alert" tabIndex={-1} className={classes.errorSummary}>
+            <h2>Error</h2>
 
-        <InputField label="Username" control={control} name="username" required />
+            <ul>
+              {Object.entries(errors).map(
+                ([key, err]: any): JSX.Element => {
+                  return (
+                    <li key={key}>
+                      <a href={`#${err.ref.id}`}>{err.message}</a>
+                    </li>
+                  );
+                }
+              )}
+            </ul>
+          </div>
+        )}
+
+        <InputField
+          label="Username"
+          control={control}
+          name="username"
+          required
+        />
         <InputField
           label="Email"
           control={control}
@@ -81,14 +95,22 @@ const SignUp: FC = () => {
             return re.test(value) ? true : ERR_MESSAGES.email;
           }}
         />
-        <InputField label="Password" type="password" control={control} name="password" required />
+        <InputField
+          label="Password"
+          type="password"
+          control={control}
+          name="password"
+          required
+        />
         <InputField
           label="Confirm Password"
           control={control}
           type="password"
           name="confirmPassword"
           required
-          validate={(value) => (value === watch('password') ? true : 'The password does not match')}
+          validate={(value) =>
+            value === watch('password') ? true : 'The password does not match'
+          }
         />
 
         <button type="submit">submit</button>

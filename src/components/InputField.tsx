@@ -53,16 +53,27 @@ const InputField: FC<Props> = ({
       rules={{ required: `${name} is required`, validate }}
       defaultValue={defaultValue}
       render={({ field, fieldState }) => {
+        console.log({ fieldState });
         return (
           <div className={classes.inputField}>
             <label htmlFor={id}>{label}</label>
 
             <div className={classes.inputWrapper}>
-              <input id={id} type={type} {...field} aria-required={required} />
+              <input
+                id={id}
+                autoComplete="off"
+                type={type}
+                {...field}
+                aria-invalid={fieldState.invalid}
+                aria-describedby={`${id}_feedback`}
+                aria-required={required}
+              />
             </div>
-            <span id={`${id}_feedback`} aria-live="polite">
-              {fieldState.error?.message}
-            </span>
+            {fieldState.error?.message && (
+              <span id={`${id}_feedback`} aria-live="assertive">
+                {fieldState.error?.message}
+              </span>
+            )}
           </div>
         );
       }}
