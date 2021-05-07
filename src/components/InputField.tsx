@@ -23,7 +23,7 @@ const useStyles = createUseStyles({
   },
   span: {
     fontSize: '0.8em',
-    color: '#ff3434',
+    color: '#E11919',
     fontWeight: 700,
     // marginTop: '-1rem',
   },

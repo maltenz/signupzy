@@ -29,7 +29,7 @@ const useStyles = createUseStyles({
     fontSize: '2em',
   },
   errorSummary: {
-    // backgroundColor: '#ff3434',
+    // backgroundColor: '#E11919',
     padding: 20,
     '& h2': {
       textAlign: 'center',
@@ -40,19 +40,19 @@ const useStyles = createUseStyles({
     margin: 0,
     marginLeft: 20,
     padding: 0,
-    color: '#ff3434',
+    color: '#E11919',
   },
   li: {
     marginBottom: 10,
   },
   a: {
     textDecoration: 'none',
-    color: '#ff3434',
+    color: '#E11919',
     fontWeight: '700',
     fontSize: '0.85em',
   },
   h2: {
-    backgroundColor: '#ff3434',
+    backgroundColor: '#E11919',
     padding: '0.5em',
   },
   button: {
