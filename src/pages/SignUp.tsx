@@ -52,8 +52,12 @@ const SignUp: FC = () => {
   const onSubmit = (data: IFormInput) => console.log(data);
 
   return (
-    <div className={classes.formContainer}>
-      <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
+    <main className={classes.formContainer}>
+      <form
+        className={classes.form}
+        onSubmit={handleSubmit(onSubmit)}
+        noValidate
+      >
         <div className={classes.formHeader} role="heading" aria-level={1}>
           Signupzy
         </div>
@@ -115,7 +119,7 @@ const SignUp: FC = () => {
 
         <button type="submit">submit</button>
       </form>
-    </div>
+    </main>
   );
 };
 

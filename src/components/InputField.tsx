@@ -69,11 +69,9 @@ const InputField: FC<Props> = ({
                 aria-required={required}
               />
             </div>
-            {fieldState.error?.message && (
-              <span id={`${id}_feedback`} aria-live="assertive">
-                {fieldState.error?.message}
-              </span>
-            )}
+            <span id={`${id}_feedback`} aria-live="assertive">
+              {fieldState.error?.message}
+            </span>
           </div>
         );
       }}
